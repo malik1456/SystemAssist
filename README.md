@@ -3,7 +3,7 @@ A cross-platform command line tool for help desk troubleshooting automation.
 
 ## Features
 - **Netork Diagnostics** - Tests connectivity via ping command, checks ips.
-- **User Login Info** -View current session details across platforms.
+- **User Login Info** -View user information in linux such as group,user,and etc, but in windows willshow host name.
 - **Printer Status Check** - Gets printer using platform(powershell).
 - **System Insights** -Display OS,CPU,memory, and disk usage using 'psutil'.
 
