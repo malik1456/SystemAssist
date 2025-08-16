@@ -17,6 +17,6 @@ A cross-platform command line tool for help desk troubleshooting automation.
 
 #### Quick Start
 ```bash
-git clone https:/github.com/malik1456/SystemAssist.git
+git clone git@github.com:malik1456/SystemAssist.git
 cd SystemAssist
 python sysassist.py
