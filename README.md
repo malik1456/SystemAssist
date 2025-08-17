@@ -16,7 +16,14 @@ A cross-platform command line tool for help desk troubleshooting automation.
 | [`system_info.py`](system_info.py) | Reports OS, CPU, memory, and disk usage using `psutil`      |
 
 #### Quick Start
+
+##### Requirements
+- Python 3.8+ installed.
+- Git installed.
+- Windows,Macos,Linux.
+
 ```bash
 git clone git@github.com:malik1456/SystemAssist.git
 cd SystemAssist
+pip install -r requirements.txt
 python sysassist.py
