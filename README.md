@@ -21,11 +21,6 @@ A cross-platform command line tool for help desk troubleshooting automation.
 
 #### Quick Start
 
-##### Requirements
-- Python 3.8+ installed.
-- Git installed.
-- Windows,Macos,Linux.
-
 ```bash
 git clone git@github.com:malik1456/SystemAssist.git
 cd SystemAssist
