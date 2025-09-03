@@ -1,11 +1,15 @@
 # SystemAssist V1.0
 A cross-platform command line tool for help desk troubleshooting automation.
 
+## Prerequisites
+- Python 3.x installed ([Download Python](https://www.python.org/downloads/))
+- Git installed ([Download Git](https://git-scm.com/downloads))
+
 ## Features
-- **Netork Diagnostics** - Tests connectivity checks ips.
-- **User Login Info** - Allows for user information.
-- **Printer Status Check** - Gets printer using platform(powershell).
-- **System Insights** -Displays OS,CPU,memory, and disk usage using 'psutil'.
+- **Network Diagnostics** - Tests connectivity, checks IPs.
+- **User Login Info** - Displays user information.
+- **Printer Status Check** - Gets printer status using platform tools (PowerShell/CUPS).
+- **System Insights** - Displays OS, CPU, memory, and disk usage using 'psutil'.
 
 ### Module Breakdown
 | Module             | Description                                               |
@@ -19,4 +23,6 @@ A cross-platform command line tool for help desk troubleshooting automation.
 ```bash
 git clone git@github.com:malik1456/SystemAssist.git
 cd SystemAssist
+pip install -r requirements.txt
 python sysassist.py
+```

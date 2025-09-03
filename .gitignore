@@ -1,0 +1,3 @@
+# Ignore Python cache and compiled files for security and cleanliness
+__pycache__/
+*.pyc
