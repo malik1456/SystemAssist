@@ -46,8 +46,74 @@ This project implements several security best practices to protect against commo
 - **Interruption Handling**: Graceful handling of keyboard interrupts and EOF
 
 ## Prerequisites
-- Python 3.8+ installed
-- Git installed
+
+### System Requirements
+- **Operating System**: Windows 10+ / macOS 10.12+ / Linux (Ubuntu 18.04+, CentOS 7+, etc.)
+- **RAM**: Minimum 2GB
+- **Storage**: 100MB free space
+
+### Python 3.8+
+SystemAssist requires Python 3.8 or higher.
+
+#### Windows Installation
+1. Download Python from [python.org](https://www.python.org/downloads/)
+2. Run the installer (.exe file)
+3. **Important**: Check "Add Python to PATH" during installation
+4. Verify installation: Open Command Prompt and run `python --version`
+
+#### macOS Installation
+1. Using Homebrew (recommended):
+   ```bash
+   brew install python
+   ```
+2. Or download from [python.org](https://www.python.org/downloads/)
+3. Verify installation: Open Terminal and run `python3 --version`
+
+#### Linux Installation
+1. Ubuntu/Debian:
+   ```bash
+   sudo apt update
+   sudo apt install python3 python3-pip
+   ```
+2. CentOS/RHEL/Fedora:
+   ```bash
+   sudo yum install python3 python3-pip  # CentOS/RHEL
+   sudo dnf install python3 python3-pip  # Fedora
+   ```
+3. Verify installation: Run `python3 --version`
+
+### Git
+Required for cloning the repository.
+
+#### Windows Installation
+1. Download Git from [git-scm.com](https://git-scm.com/download/win)
+2. Run the installer (.exe file)
+3. Use default settings (recommended for beginners)
+4. Verify installation: Open Command Prompt and run `git --version`
+
+#### macOS Installation
+1. Using Homebrew (recommended):
+   ```bash
+   brew install git
+   ```
+2. Or install Xcode Command Line Tools:
+   ```bash
+   xcode-select --install
+   ```
+3. Verify installation: Open Terminal and run `git --version`
+
+#### Linux Installation
+1. Ubuntu/Debian:
+   ```bash
+   sudo apt update
+   sudo apt install git
+   ```
+2. CentOS/RHEL/Fedora:
+   ```bash
+   sudo yum install git  # CentOS/RHEL
+   sudo dnf install git  # Fedora
+   ```
+3. Verify installation: Run `git --version`
 
 ## Features
 - **Network Diagnostics** - Tests connectivity by pinging 8.8.8.8
@@ -75,7 +141,7 @@ This project implements several security best practices to protect against commo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/SystemAssist.git
+   git clone https://github.com/malik1456/SystemAssist.git
    cd SystemAssist
    ```
 
