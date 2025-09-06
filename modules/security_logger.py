@@ -2,6 +2,7 @@
 import logging  # Import logging module for logging events
 import os  # Import os module for file system operations
 from datetime import datetime  # Import datetime for timestamping logs
+import random  # Import random module at module level
 
 class SecurityLogger:
     def __init__(self):
@@ -39,7 +40,6 @@ class SecurityLogger:
             "Unexpected error. Please retry your request.",
             "An issue was detected. Please try again."
         ]
-        import random
         print(random.choice(decoy_messages))  # Print a random generic error message
 
 # End of security_logger.py

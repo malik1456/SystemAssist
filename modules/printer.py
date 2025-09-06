@@ -2,6 +2,7 @@
 # ----------------------------------------
 import platform  # Detect the operating system
 import subprocess  # Run system commands
+from modules.security_logger import SecurityLogger  # Import security logger at module level
 
 # Helper function for troubleshooting steps
 def print_troubleshooting(os_type):
@@ -15,12 +16,21 @@ def print_troubleshooting(os_type):
         except subprocess.CalledProcessError as ex:
             print(f"Could not restart Print Spooler: {ex}")
         print("- Check printer cables and power.")
-    elif os_type in ["Linux", "Darwin"]:
+    elif os_type == "Linux":
         print("- Trying to restart CUPS service (may require sudo)...")
         try:
             subprocess.run(["sudo", "systemctl", "restart", "cups"], check=True)
             print("CUPS service restart attempted.")
         except subprocess.CalledProcessError as ex:
+            print(f"Could not restart CUPS: {ex}")
+        print("- Check printer connection and status.")
+    elif os_type == "Darwin":
+        print("- Trying to restart CUPS service (may require sudo)...")
+        try:
+            subprocess.run(["sudo", "launchctl", "stop", "org.cups.cupsd"], check=True)
+            subprocess.run(["sudo", "launchctl", "start", "org.cups.cupsd"], check=True)
+            print("CUPS service restart attempted.")
+        except (subprocess.CalledProcessError, FileNotFoundError) as ex:
             print(f"Could not restart CUPS: {ex}")
         print("- Check printer connection and status.")
     else:
@@ -52,15 +62,18 @@ def run():
             print("Unsupported OS.")
     except subprocess.CalledProcessError as e:
         # Log error securely and show generic message
-        from modules.security_logger import SecurityLogger
         logger = SecurityLogger()
         logger.log_error(e, "printer.run")
         print("Error checking printer status. Please try again later.")
+        print_troubleshooting(os_type)
     except FileNotFoundError:
         print("Printer diagnostic command not found. Please ensure required utilities are installed.")
+        print("Troubleshooting in progress")
+        print_troubleshooting(os_type)
     except Exception as e:
-        from modules.security_logger import SecurityLogger
         logger = SecurityLogger()
         logger.log_error(e, "printer.run")
         print("An unexpected error occurred while checking printer status. Please try again later.")
+        print("Troubleshooting in progress")
+        print_troubleshooting(os_type)
 # End of printer diagnostics module

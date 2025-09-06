@@ -2,22 +2,7 @@
 # ----------------------------------------
 import platform  # Used to detect the operating system
 import subprocess  # Used to run system commands
-
-# Helper function for troubleshooting steps
-def print_troubleshooting(os_type):
-    """Prints troubleshooting steps based on OS type."""
-    if os_type == "Windows":
-        print("- Ensure your user account is active and not locked.")
-        print("- Make sure you have permission to run system commands.")
-        print("- Try running the script as an administrator.")
-        print("- Check if 'whoami' command is available.")
-    elif os_type in ["Linux", "Darwin"]:
-        print("- Ensure your user account is active and not locked.")
-        print("- Make sure you have permission to run system commands.")
-        print("- Try running the script with sudo.")
-        print("- Check if 'id' command is available.")
-    else:
-        print("- Unsupported OS. No troubleshooting steps available.")
+from modules.printer import print_troubleshooting  # Import troubleshooting function
 
 # Main function for displaying login information
 def run():
