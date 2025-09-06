@@ -15,7 +15,6 @@ A cross-platform command line tool for help desk troubleshooting automation.
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-- [Demo](#demo)
 - [Troubleshooting](#troubleshooting)
 - [Changelog](#changelog)
 - [Support](#support)
@@ -47,22 +46,23 @@ This project implements several security best practices to protect against commo
 - **Interruption Handling**: Graceful handling of keyboard interrupts and EOF
 
 ## Prerequisites
-- Python 3.x installed ([Download Python](https://www.python.org/downloads/))
-- Git installed ([Download Git](https://git-scm.com/downloads))
+- Python 3.8+ installed
+- Git installed
 
 ## Features
-- **Network Diagnostics** - Tests connectivity, checks IPs.
-- **User Login Info** - Displays user information.
-- **Printer Status Check** - Gets printer status using platform tools (PowerShell/CUPS).
-- **System Insights** - Displays OS, CPU, memory, and disk usage using 'psutil'.
+- **Network Diagnostics** - Tests connectivity by pinging 8.8.8.8
+- **User Login Info** - Displays current user information using OS-specific commands
+- **Printer Status Check** - Gets printer status using platform tools (PowerShell/CUPS) and provides troubleshooting
+- **System Insights** - Displays OS, CPU, memory, and disk usage using psutil, with automatic cleanup suggestions
 
 ### Module Breakdown
 | Module             | Description                                               |
 |--------------------|-----------------------------------------------------------|
-| [`network.py`](modules/network.py)     | Runs ping tests, gathers IP info, and checks DNS resolution |
-| [`login.py`](modules/login.py)         | Displays current user session and login details          |
-| [`printer.py`](modules/printer.py)     | Checks printer status using PowerShell (Windows) or CUPS (macOS/Linux) |
-| [`system_info.py`](modules/system_info.py) | Reports OS, CPU, memory, and disk usage using `psutil`      |
+| [`network.py`](modules/network.py)     | Runs ping tests to 8.8.8.8, captures output for connectivity check |
+| [`login.py`](modules/login.py)         | Displays current user session using 'whoami' (Windows) or 'id' (Linux/macOS) |
+| [`printer.py`](modules/printer.py)     | Checks printer status using PowerShell (Windows) or lpstat (Linux/macOS), includes troubleshooting function |
+| [`system_info.py`](modules/system_info.py) | Reports OS, CPU, memory, disk usage; attempts package cache cleanup if disk >60% |
+| [`security_logger.py`](modules/security_logger.py) | Logs security events and errors to daily log files in modules/logs/ |
 
 ## Quick Start
 
@@ -102,11 +102,14 @@ Or make it executable and run:
 ```
 
 ### Menu Options:
-1. **Network Diagnostics** - Test internet connectivity
+![SystemAssist Demo](./Demo.png)
+
+1. **Network Diagnostics** - Test internet connectivity by pinging Google DNS
 2. **Login Info** - Display current user information
 3. **Printer Status** - Check printer status and configuration
 4. **System Information** - View system specs and resource usage
-5. **Exit** - Close the application
+5. **Demo** - View demo screenshot
+6. **Exit** - Close the application
 
 ## Contributing
 
@@ -119,10 +122,6 @@ Or make it executable and run:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
-## Demo
-
-![SystemAssist Demo](./Demo.png)
 
 ## Troubleshooting
 
@@ -164,14 +163,17 @@ If you encounter any issues or have questions:
 
 ```
 SystemAssist/
-├── sysassist.py          # Main CLI application
-├── requirements.txt      # Python dependencies
+├── sysassist.py          # Main CLI application with menu and input validation
+├── requirements.txt      # Python dependencies (psutil)
 ├── README.md             # This file
-├── .gitignore            # Git ignore rules
+├── LICENSE               # MIT License
+├── .gitignore            # Git ignore rules for cache and logs
 ├── Demo.png              # Demo screenshot of SystemAssist CLI
 └── modules/
-    ├── network.py        # Network diagnostics
+    ├── __init__.py       # Module initialization
+    ├── network.py        # Network diagnostics (ping 8.8.8.8)
     ├── login.py          # User login information
-    ├── printer.py        # Printer status checks
-    ├── system_info.py    # System information display
-    └── security_logger.py # Security event logging
+    ├── printer.py        # Printer status checks and troubleshooting
+    ├── system_info.py    # System information display and cleanup
+    ├── security_logger.py # Security event logging
+    └── logs/             # Directory for log files (created automatically)
