@@ -70,6 +70,7 @@ This project implements several security best practices to protect against commo
 
 #### Quick Start
 
+<<<<<<< HEAD
 ##### Requirements
 - Python 3.8+ installed.
 - Git installed.
@@ -96,6 +97,8 @@ This project implements several security best practices to protect against commo
 ## Usage
 
 Run the diagnostic tool:
+=======
+>>>>>>> 8c4a3ba2e608dc428a0eda56082e93da85b51055
 ```bash
 python3 sysassist.py
 ```
