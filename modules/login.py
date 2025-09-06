@@ -36,19 +36,16 @@ def run():
             # Unsupported OS case
             print("Unsupported OS.")
     except subprocess.CalledProcessError as e:
-        # Handle command errors (login command failed)
-        print("Error retrieving login info. Command failed.")
-        print(e.stdout)
-        print(e.stderr)
-        print("Troubleshooting steps:")
-        print_troubleshooting(os_type)
+        # Log error securely and show generic message
+        from modules.security_logger import SecurityLogger
+        logger = SecurityLogger()
+        logger.log_error(e, "login.run")
+        print("Error retrieving login info. Please try again later.")
     except FileNotFoundError:
-        # Handle missing command utilities
-        print("Login info command not found on this system.")
-        print("Please ensure required utilities ('whoami', 'id') are installed.")
-    except Exception:
-        # General error handling (limit sensitive info)
-        print("An unexpected error occurred while retrieving login info.")
-        print("Troubleshooting steps:")
-        print_troubleshooting(os_type)
+        print("Login info command not found. Please ensure required utilities are installed.")
+    except Exception as e:
+        from modules.security_logger import SecurityLogger
+        logger = SecurityLogger()
+        logger.log_error(e, "login.run")
+        print("An unexpected error occurred while retrieving login info. Please try again later.")
 # End of login information module

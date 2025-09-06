@@ -51,21 +51,16 @@ def run():
             # Unsupported OS case
             print("Unsupported OS.")
     except subprocess.CalledProcessError as e:
-        # Handle command errors (printer command failed)
-        print("Error checking printer status. Command failed.")
-        print(e.stdout)
-        print(e.stderr)
-        print("Troubleshooting steps:")
-        print_troubleshooting(os_type)
+        # Log error securely and show generic message
+        from modules.security_logger import SecurityLogger
+        logger = SecurityLogger()
+        logger.log_error(e, "printer.run")
+        print("Error checking printer status. Please try again later.")
     except FileNotFoundError:
-        # Handle missing command utilities
-        print("Printer diagnostic command not found on this system.")
-        print("Please ensure required utilities (PowerShell, lpstat) are installed.")
+        print("Printer diagnostic command not found. Please ensure required utilities are installed.")
     except Exception as e:
-        # General error handling (limit sensitive info)
-        print("An unexpected error occurred while checking printer status.")
-        print("Troubleshooting steps:")
-        print_troubleshooting(os_type)
-        # Security: Do not print full exception details
-        # print(f"Error details: {e}")
+        from modules.security_logger import SecurityLogger
+        logger = SecurityLogger()
+        logger.log_error(e, "printer.run")
+        print("An unexpected error occurred while checking printer status. Please try again later.")
 # End of printer diagnostics module

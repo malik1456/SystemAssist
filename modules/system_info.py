@@ -1,9 +1,9 @@
-# import necessary modules
+# Import necessary modules
 import platform  # used to get system information
 import psutil  # used to get hardware and usage stats
 import subprocess  # used to run system commands
 
-# defining the run function for system information
+# Define the run function for system information
 def run():
     print("\n[System Info]")
 
@@ -46,6 +46,8 @@ def run():
                     print("'apt-get clean' failed. Try running manually.")
             else:
                 print("No automatic cleanup available for this OS.")
-    except Exception:
-        # catch-all for any errors during info retrieval
-        print("Error retrieving system info. Please check your permissions and try again.")
+    except Exception as e:
+        from modules.security_logger import SecurityLogger
+        logger = SecurityLogger()
+        logger.log_error(e, "system_info.run")
+        print("Error retrieving system info. Please try again later.")
