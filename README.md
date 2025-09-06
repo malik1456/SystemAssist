@@ -10,7 +10,6 @@ A cross-platform command line tool for help desk troubleshooting automation.
 - [Prerequisites](#prerequisites)
 - [Features](#features)
 - [Module Breakdown](#module-breakdown)
-- [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -59,7 +58,10 @@ SystemAssist requires Python 3.8 or higher.
 1. Download Python from [python.org](https://www.python.org/downloads/)
 2. Run the installer (.exe file)
 3. **Important**: Check "Add Python to PATH" during installation
-4. Verify installation: Open Command Prompt and run `python --version`
+4. Verify installation: Open Command Prompt and run:
+   ```bash
+   python --version
+   ```
 
 #### macOS Installation
 1. Using Homebrew (recommended):
@@ -67,7 +69,10 @@ SystemAssist requires Python 3.8 or higher.
    brew install python
    ```
 2. Or download from [python.org](https://www.python.org/downloads/)
-3. Verify installation: Open Terminal and run `python3 --version`
+3. Verify installation: Open Terminal and run:
+   ```bash
+   python3 --version
+   ```
 
 #### Linux Installation
 1. Ubuntu/Debian:
@@ -80,7 +85,10 @@ SystemAssist requires Python 3.8 or higher.
    sudo yum install python3 python3-pip  # CentOS/RHEL
    sudo dnf install python3 python3-pip  # Fedora
    ```
-3. Verify installation: Run `python3 --version`
+3. Verify installation: Run:
+   ```bash
+   python3 --version
+   ```
 
 ### Git
 Required for cloning the repository.
@@ -89,7 +97,10 @@ Required for cloning the repository.
 1. Download Git from [git-scm.com](https://git-scm.com/download/win)
 2. Run the installer (.exe file)
 3. Use default settings (recommended for beginners)
-4. Verify installation: Open Command Prompt and run `git --version`
+4. Verify installation: Open Command Prompt and run:
+   ```bash
+   git --version
+   ```
 
 #### macOS Installation
 1. Using Homebrew (recommended):
@@ -100,7 +111,10 @@ Required for cloning the repository.
    ```bash
    xcode-select --install
    ```
-3. Verify installation: Open Terminal and run `git --version`
+3. Verify installation: Open Terminal and run:
+   ```bash
+   git --version
+   ```
 
 #### Linux Installation
 1. Ubuntu/Debian:
@@ -113,7 +127,10 @@ Required for cloning the repository.
    sudo yum install git  # CentOS/RHEL
    sudo dnf install git  # Fedora
    ```
-3. Verify installation: Run `git --version`
+3. Verify installation: Run:
+   ```bash
+   git --version
+   ```
 
 ## Features
 - **Network Diagnostics** - Tests connectivity by pinging 8.8.8.8
@@ -129,13 +146,6 @@ Required for cloning the repository.
 | [`printer.py`](modules/printer.py)     | Checks printer status using PowerShell (Windows) or lpstat (Linux/macOS), includes troubleshooting function |
 | [`system_info.py`](modules/system_info.py) | Reports OS, CPU, memory, disk usage; attempts package cache cleanup if disk >60% |
 | [`security_logger.py`](modules/security_logger.py) | Logs security events and errors to daily log files in modules/logs/ |
-
-## Quick Start
-
-### Requirements
-- Python 3.8+ installed.
-- Git installed.
-- Windows, macOS, Linux.
 
 ## Installation
 
