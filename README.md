@@ -75,7 +75,7 @@ This project implements several security best practices to protect against commo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/SystemAssist.git
+   git clone https://github.com/malik1456/SystemAssist.git
    cd SystemAssist
    ```
 
