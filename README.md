@@ -1,10 +1,6 @@
 # SystemAssist V1.1
 A cross-platform command line tool for help desk troubleshooting automation.
 
-[![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)]()
-
 ## Navigation
 - [Security Practices](#security-practices)
   - [Input Validation & Sanitization](#input-validation--sanitization)
@@ -68,10 +64,9 @@ This project implements several security best practices to protect against commo
 | [`printer.py`](modules/printer.py)     | Checks printer status using PowerShell (Windows) or CUPS (macOS/Linux) |
 | [`system_info.py`](modules/system_info.py) | Reports OS, CPU, memory, and disk usage using `psutil`      |
 
-#### Quick Start
+## Quick Start
 
-<<<<<<< HEAD
-##### Requirements
+### Requirements
 - Python 3.8+ installed.
 - Git installed.
 - Windows, macOS, Linux.
@@ -97,8 +92,6 @@ This project implements several security best practices to protect against commo
 ## Usage
 
 Run the diagnostic tool:
-=======
->>>>>>> 8c4a3ba2e608dc428a0eda56082e93da85b51055
 ```bash
 python3 sysassist.py
 ```
@@ -110,18 +103,18 @@ Or make it executable and run:
 
 ### Menu Options:
 1. **Network Diagnostics** - Test internet connectivity
-2. **Login Info** - Display current user information  
+2. **Login Info** - Display current user information
 3. **Printer Status** - Check printer status and configuration
 4. **System Information** - View system specs and resource usage
 5. **Exit** - Close the application
 
 ## Contributing
 
-1. Fork the repository  
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)  
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)  
-4. Push to the branch (`git push origin feature/AmazingFeature`)  
-5. Open a Pull Request  
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
