@@ -24,25 +24,25 @@ A cross-platform command line tool for help desk troubleshooting automation.
 This project implements several security best practices to protect against common vulnerabilities:
 
 ### Input Validation & Sanitization
-- **Length Limits**: Input is restricted to prevent buffer overflow attacks
-- **Pattern Matching**: Regular expressions detect and block potentially malicious input patterns
-- **Type Validation**: Strict validation ensures only expected data types are accepted
+- **Input Length Validation**: Input is restricted to prevent resource exhaustion and ensure proper validation.
+- **Pattern Matching**: Regular expressions detect and block potentially malicious input patterns.
+- **Type Validation**: Strict validation ensures only expected data types are accepted.
 
 ### Error Handling & Information Disclosure Prevention
-- **Generic Error Messages**: User-facing errors are generic to prevent information leakage
-- **Secure Logging**: Detailed error information is logged securely for administrators
-- **Decoy Messaging**: Randomized error messages to confuse potential attackers
+- **Generic Error Messages**: User-facing errors are generic to prevent information leakage.
+- **Secure Logging**: Detailed error information is logged securely for administrators.
+- **Consistent Messaging**: Error messages are consistent and informative without revealing sensitive details.
 
 ### Subprocess Security
-- **No Shell Injection**: Commands are executed without shell=True to prevent injection
-- **Privilege Awareness**: Warnings for operations that may require elevated privileges
-- **Safe Command Execution**: Input is never passed directly to system commands
-- **Cross-Platform Security**: SystemAssist is platform aware, adapting security measures based on the operating system (Windows, macOS, Linux) to ensure consistent security across platforms
+- **No Shell Injection**: Commands are executed without shell=True to prevent injection.
+- **Privilege Awareness**: Warnings for operations that may require elevated privileges.
+- **Safe Command Execution**: Input is sanitized and validated before being used in system commands.
+- **Cross-Platform Awareness**: SystemAssist detects the operating system (Windows, macOS, Linux) to adapt functionality accordingly.
 
 ### Logging & Monitoring
-- **Security Event Logging**: All security-related events are logged with timestamps
-- **Attempt Limiting**: Maximum attempts prevent brute force attacks
-- **Interruption Handling**: Graceful handling of keyboard interrupts and EOF
+- **Security Event Logging**: All security-related events are logged with timestamps.
+- **Attempt Limiting**: Limits user input attempts to prevent misuse.
+- **Interruption Handling**: Graceful handling of keyboard interrupts and EOF.
 
 ## Prerequisites
 
@@ -50,9 +50,12 @@ This project implements several security best practices to protect against commo
 - **Operating System**: Windows 10+ / macOS 10.12+ / Linux (Ubuntu 18.04+, CentOS 7+, etc.)
 - **RAM**: Minimum 2GB
 - **Storage**: 100MB free space
+- **System Tools**: ping, whoami/id (Windows), lpstat (Linux/macOS printing)
+- **Network**: Internet connectivity for network diagnostics
+- **Permissions**: Administrative privileges may be required for some functions
 
-### Python 3.8+
-SystemAssist requires Python 3.8 or higher.
+### Python 3.6+
+SystemAssist requires Python 3.6 or higher.
 
 #### Windows Installation
 1. Download Python from [python.org](https://www.python.org/downloads/)
@@ -80,12 +83,19 @@ SystemAssist requires Python 3.8 or higher.
    sudo apt update
    sudo apt install python3 python3-pip
    ```
-2. CentOS/RHEL/Fedora:
+2. CentOS/RHEL (7 and earlier):
    ```bash
-   sudo yum install python3 python3-pip  # CentOS/RHEL
-   sudo dnf install python3 python3-pip  # Fedora
+   sudo yum install python3 python3-pip
    ```
-3. Verify installation: Run:
+3. CentOS/RHEL (8+) / Fedora:
+   ```bash
+   sudo dnf install python3 python3-pip
+   ```
+4. Arch Linux:
+   ```bash
+   sudo pacman -S python python-pip
+   ```
+5. Verify installation: Run:
    ```bash
    python3 --version
    ```
@@ -103,14 +113,16 @@ Required for cloning the repository.
    ```
 
 #### macOS Installation
-1. Using Homebrew (recommended):
+1. Install Homebrew (if not already installed):
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+2. Install Git using Homebrew:
    ```bash
    brew install git
    ```
-2. Or install Xcode Command Line Tools:
-   ```bash
-   xcode-select --install
-   ```
+
 3. Verify installation: Open Terminal and run:
    ```bash
    git --version
@@ -122,12 +134,19 @@ Required for cloning the repository.
    sudo apt update
    sudo apt install git
    ```
-2. CentOS/RHEL/Fedora:
+2. CentOS/RHEL (7 and earlier):
    ```bash
-   sudo yum install git  # CentOS/RHEL
-   sudo dnf install git  # Fedora
+   sudo yum install git
    ```
-3. Verify installation: Run:
+3. CentOS/RHEL (8+) / Fedora:
+   ```bash
+   sudo dnf install git
+   ```
+4. Arch Linux:
+   ```bash
+   sudo pacman -S git
+   ```
+5. Verify installation: Run:
    ```bash
    git --version
    ```
@@ -143,8 +162,8 @@ Required for cloning the repository.
 |--------------------|-----------------------------------------------------------|
 | [`network.py`](modules/network.py)     | Runs ping tests to 8.8.8.8, captures output for connectivity check |
 | [`login.py`](modules/login.py)         | Displays current user session using 'whoami' (Windows) or 'id' (Linux/macOS) |
-| [`printer.py`](modules/printer.py)     | Checks printer status using PowerShell (Windows) or lpstat (Linux/macOS), includes troubleshooting function |
-| [`system_info.py`](modules/system_info.py) | Reports OS, CPU, memory, disk usage; attempts package cache cleanup if disk >60% |
+| [`printer.py`](modules/printer.py)     | Checks printer status using PowerShell (Windows) or lpstat (Linux/macOS) |
+| [`system_info.py`](modules/system_info.py) | Reports OS, CPU, memory, disk usage using psutil; attempts cleanup if disk >60% |
 | [`security_logger.py`](modules/security_logger.py) | Logs security events and errors to daily log files in modules/logs/ |
 
 ## Installation
@@ -206,14 +225,27 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 **Permission Errors:**
 - On macOS/Linux, some commands may require sudo privileges
 - The tool will warn you when elevated permissions are needed
+- Windows may require running as Administrator for some functions
+
+**Missing System Tools:**
+- **ping**: Required for network diagnostics (usually pre-installed)
+- **whoami/id**: Required for login info (usually pre-installed)
+- **lpstat**: Required for printer status on Linux/macOS (install CUPS)
+- Error: "command not found" indicates missing system utilities
 
 **Missing Dependencies:**
 - Ensure all Python packages are installed: `pip install -r requirements.txt`
-- On some systems, you may need to install system tools (ping, lpstat, etc.)
+- Only `psutil` is required beyond Python standard library
 
 **Network Issues:**
 - The network diagnostic requires internet connectivity
 - Firewall settings may block ping requests
+- Corporate networks may restrict ICMP traffic
+
+**Unsupported Operating Systems:**
+- Tool supports Windows, macOS, and Linux
+- BSD variants (FreeBSD, OpenBSD) are not officially supported
+- Some Linux distributions may have different package managers
 
 ## Changelog
 
